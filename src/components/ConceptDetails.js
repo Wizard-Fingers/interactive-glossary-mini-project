@@ -1,20 +1,25 @@
 import Image from "next/image";
 import React, { useState } from "react";
+
 export default function ConceptDetails({ concept }) {
-  const [answer, setAnswer] = useState("");
+  const [selectedOption, setSelectedOption] = useState("");
   const [isCorrect, setIsCorrect] = useState(null);
 
   const handleCheckAnswer = () => {
-    if (answer.toLowerCase() === concept.quizAnswer.toLowerCase()) {
+    if (selectedOption.toLowerCase() === concept.quizAnswer.toLowerCase()) {
       setIsCorrect(true);
     } else {
       setIsCorrect(false);
     }
   };
+
+  const handleOptionChange = (e) => {
+    setSelectedOption(e.target.value);
+  };
+
   return (
     <div>
       <h1 className="text-2xl font-bold mb-4">{concept.name}</h1>
-
       <Image
         src="https://via.placeholder.com/500x300"
         alt={concept.name}
@@ -26,15 +31,24 @@ export default function ConceptDetails({ concept }) {
       <div className="mt-8">
         <h2 className="text-lg font-bold mb-2">Quiz</h2>
         <p>{concept.quizQuestion}</p>
-        <input
-          type="text"
-          value={answer}
-          onChange={(e) => setAnswer(e.target.value)}
-          className="border p-2 mt-2 mb-4"
-        />
+        {/* Render radio buttons for multiple choices */}
+        <div className="flex flex-col">
+          {concept.quizOptions.map((option, index) => (
+            <label key={index} className="inline-flex items-center mt-2">
+              <input
+                type="radio"
+                value={option}
+                checked={selectedOption === option}
+                onChange={handleOptionChange}
+                className="form-radio h-5 w-5 text-blue-600"
+              />
+              <span className="ml-2">{option}</span>
+            </label>
+          ))}
+        </div>
         <button
           onClick={handleCheckAnswer}
-          className="bg-blue-500 text-white px-4 py-2 rounded"
+          className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
         >
           Check Answer
         </button>

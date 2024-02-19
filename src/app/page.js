@@ -11,8 +11,8 @@ const conceptsData = [
       "Variables are used to store data that can be referenced and manipulated in a program.",
     // image: "/variable.jpg",
     quizQuestion: "What is a variable?",
-    quizAnswer:
-      "A variable is used to store data that can be referenced and manipulated in a program.",
+    quizOptions: ["A value that can change", "A constant value", "A function"],
+    quizAnswer: "A value that can change",
   },
   {
     id: 2,
@@ -21,8 +21,8 @@ const conceptsData = [
       "Functions are blocks of reusable code that perform a specific task.",
     // image: "/function.jpg",
     quizQuestion: "What are functions?",
-    quizAnswer:
-      "Functions are blocks of reusable code that perform a specific task.",
+    quizOptions: ["Variables", "Loops", "Blocks of reusable code"],
+    quizAnswer: "Blocks of reusable code",
   },
   // Add more concepts as needed
 ];
