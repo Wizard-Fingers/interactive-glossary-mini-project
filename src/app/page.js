@@ -9,7 +9,7 @@ const conceptsData = [
     name: "Variables",
     description:
       "Variables are used to store data that can be referenced and manipulated in a program.",
-    image: "/variable.jpg",
+    // image: "/variable.jpg",
     quizQuestion: "What is a variable?",
     quizAnswer:
       "A variable is used to store data that can be referenced and manipulated in a program.",
@@ -19,7 +19,7 @@ const conceptsData = [
     name: "Functions",
     description:
       "Functions are blocks of reusable code that perform a specific task.",
-    image: "/function.jpg",
+    // image: "/function.jpg",
     quizQuestion: "What are functions?",
     quizAnswer:
       "Functions are blocks of reusable code that perform a specific task.",
