@@ -7,6 +7,7 @@ export default function ConceptDetails({ concept }) {
   const [shuffledOptions, setShuffledOptions] = useState([]);
   const [correctCount, setCorrectCount] = useState(0);
   const [wrongCount, setWrongCount] = useState(0);
+  const [answerChecked, setAnswerChecked] = useState(false);
 
   useEffect(() => {
     const shuffleOptions = () => {
@@ -18,7 +19,6 @@ export default function ConceptDetails({ concept }) {
       setShuffledOptions(options);
     };
 
-    // Shuffle the options when the component mounts or concept changes
     shuffleOptions();
   }, [concept]);
 
@@ -30,6 +30,7 @@ export default function ConceptDetails({ concept }) {
       setIsCorrect(false);
       setWrongCount(wrongCount + 1);
     }
+    setAnswerChecked(true);
   };
 
   const handleOptionChange = (e) => {
@@ -59,6 +60,7 @@ export default function ConceptDetails({ concept }) {
                 checked={selectedOption === option}
                 onChange={handleOptionChange}
                 className="form-radio h-5 w-5 text-blue-600"
+                disabled={answerChecked} // Disable options if answer has been checked
               />
               <span className="ml-2">{option}</span>
             </label>
@@ -67,6 +69,7 @@ export default function ConceptDetails({ concept }) {
         <button
           onClick={handleCheckAnswer}
           className="bg-blue-500 text-white px-4 py-2 rounded mt-6"
+          disabled={answerChecked} // Disable button if answer has been checked
         >
           Check Answer
         </button>
