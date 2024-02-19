@@ -22,18 +22,25 @@ export default function ConceptDetails({ concept }) {
   }, [concept]);
 
   const handleCheckAnswer = () => {
-    if (selectedOption.toLowerCase() === concept.quizAnswer.toLowerCase()) {
-      setIsCorrect(true);
+    const isAnswerCorrect =
+      selectedOption.toLowerCase() === concept.quizAnswer.toLowerCase();
+    setIsCorrect(isAnswerCorrect);
+
+    if (isAnswerCorrect) {
       setCorrectCount(correctCount + 1);
     } else {
-      setIsCorrect(false);
       setWrongCount(wrongCount + 1);
     }
+
+    setTimeout(() => {
+      setIsCorrect(null); // Clear the message after 2 seconds
+    }, 2000);
   };
 
   const handleOptionChange = (e) => {
     setSelectedOption(e.target.value);
   };
+
   return (
     <div className="mx-auto max-w-lg p-8 bg-white rounded-md shadow-md">
       <h1 className="text-2xl font-bold mb-6">{concept.name}</h1>
