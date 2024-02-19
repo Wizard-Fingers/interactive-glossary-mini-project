@@ -5,26 +5,30 @@ export default function ConceptDetails({ concept }) {
   const [selectedOption, setSelectedOption] = useState("");
   const [isCorrect, setIsCorrect] = useState(null);
   const [shuffledOptions, setShuffledOptions] = useState([]);
+  const [correctCount, setCorrectCount] = useState(0);
+  const [wrongCount, setWrongCount] = useState(0);
 
   useEffect(() => {
+    const shuffleOptions = () => {
+      const options = [...concept.quizOptions];
+      for (let i = options.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [options[i], options[j]] = [options[j], options[i]];
+      }
+      setShuffledOptions(options);
+    };
+
     // Shuffle the options when the component mounts or concept changes
     shuffleOptions();
   }, [concept]);
 
-  const shuffleOptions = () => {
-    const options = [...concept.quizOptions];
-    for (let i = options.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [options[i], options[j]] = [options[j], options[i]];
-    }
-    setShuffledOptions(options);
-  };
-
   const handleCheckAnswer = () => {
     if (selectedOption.toLowerCase() === concept.quizAnswer.toLowerCase()) {
       setIsCorrect(true);
+      setCorrectCount(correctCount + 1);
     } else {
       setIsCorrect(false);
+      setWrongCount(wrongCount + 1);
     }
   };
 
@@ -46,7 +50,6 @@ export default function ConceptDetails({ concept }) {
       <div>
         <h2 className="text-lg font-bold mb-4">Quiz</h2>
         <p className="mb-4">{concept.quizQuestion}</p>
-        {/* Render radio buttons for shuffled options */}
         <div>
           {shuffledOptions.map((option, index) => (
             <label key={index} className="flex items-center mb-2">
@@ -74,6 +77,10 @@ export default function ConceptDetails({ concept }) {
             {isCorrect ? "Correct!" : "Incorrect! Try again."}
           </p>
         )}
+      </div>
+      <div className="mt-6 flex justify-between">
+        <div>Correct: {correctCount}</div>
+        <div>Wrong: {wrongCount}</div>
       </div>
     </div>
   );
