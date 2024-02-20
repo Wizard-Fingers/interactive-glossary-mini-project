@@ -42,36 +42,41 @@ export default function ConceptDetails({ concept }) {
   };
 
   return (
-    <div className="mx-auto max-w-lg p-8 bg-white rounded-md shadow-md">
-      <h1 className="text-2xl font-bold mb-6">{concept.name}</h1>
+    <div className="mx-auto max-w-lg p-8 bg-white rounded-md shadow-md ">
+      <h1 className="text-2xl font-bold mb-6 p-1">{concept.name}</h1>
       <Image
         src="https://via.placeholder.com/500x300"
         alt={concept.name}
-        className="mb-6 rounded-md"
+        className="rounded-md mb-6"
         width={500}
         height={300}
       />
       <p className="mb-6">{concept.description}</p>
       <div>
         <h2 className="text-lg font-bold mb-4">Quiz</h2>
-        <p className="mb-4">{concept.quizQuestion}</p>
-        <div>
-          {shuffledOptions.map((option, index) => (
-            <label key={index} className="flex items-center mb-2">
-              <input
-                type="radio"
-                value={option}
-                checked={selectedOption === option}
-                onChange={handleOptionChange}
-                className="form-radio h-5 w-5 text-blue-600"
-              />
-              <span className="ml-2">{option}</span>
-            </label>
-          ))}
-        </div>
+
+        <p className="text-xl my-4 font-bold">{concept.quizQuestion}</p>
+
+        {shuffledOptions.map((option, index) => (
+          <div key={index} className="flex items-center mb-5">
+            <input
+              type="radio"
+              value={option}
+              checked={selectedOption === option}
+              onChange={handleOptionChange}
+              className="form-radio h-5 w-5 text-blue-600"
+            />
+            <span className="pl-2 w-full">
+              <div className="text-lg font-semibold min-w-[26rem]">
+                {option}
+              </div>
+            </span>
+          </div>
+        ))}
+
         <button
           onClick={handleCheckAnswer}
-          className="bg-blue-500 text-white px-4 py-2 rounded mt-6"
+          className="bg-blue-500 text-white px-4 py-2 rounded m-6"
         >
           Check Answer
         </button>
